@@ -101,6 +101,15 @@
       position: relative;
     }
 
+    #search-wrap.pinned {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+    }
+
     #search {
       width: 100%;
       background: none;
@@ -1479,6 +1488,9 @@
 
       var clearBtn = document.getElementById("search-clear");
       if (clearBtn) clearBtn.classList.toggle("hidden", !hasQuery);
+
+      var searchWrap = document.getElementById("search-wrap");
+      if (searchWrap) searchWrap.classList.toggle("pinned", hasQuery);
 
       document.querySelectorAll(".entry").forEach(function(entry) {
         var textEl = entry.querySelector(".entry-text");
