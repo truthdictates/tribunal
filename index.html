@@ -7,7 +7,7 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&family=Lora:wght@400&family=Playfair+Display:wght@400;600&display=swap");
 
-    html { scroll-behavior: smooth; }
+    /* html { scroll-behavior: smooth; } */
     *, *::before, *::after { box-sizing: border-box; }
 
     :root {
@@ -98,6 +98,7 @@
     #search-wrap {
       max-width: 780px;
       margin: 0 auto 1rem;
+      position: relative;
     }
 
     #search {
@@ -108,13 +109,31 @@
       color: var(--text);
       font-family: system-ui, sans-serif;
       font-size: 0.8rem;
-      padding: 0.35rem 0.75rem;
+      padding: 0.35rem 2rem 0.35rem 0.75rem;
       outline: none;
       transition: border-color 0.15s;
     }
 
     #search::placeholder { color: var(--muted); }
     #search:focus { border-color: var(--muted); }
+
+    #search-clear {
+      position: absolute;
+      top: 50%;
+      right: 0.4rem;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.15s;
+    }
+
+    #search-clear:hover { color: var(--link-hover); }
 
     /* --- nav --- */
 
@@ -186,9 +205,16 @@
       display: grid;
       grid-template-columns: 130px 1fr;
       border-bottom: 1px solid var(--border);
+      cursor: pointer;
     }
 
     .entry:hover { background-color: var(--surface); }
+
+    .entry.selected {
+      background-color: var(--surface);
+      outline: 2px solid var(--link);
+      outline-offset: -2px;
+    }
 
     .entry-date {
       padding: 0.25rem 1.2rem;
@@ -264,6 +290,7 @@
   </div>
   <div id="search-wrap">
     <input id="search" type="text" placeholder="Search…" autocomplete="off">
+    <button id="search-clear" class="hidden" aria-label="Clear search">Clear ❌</button>
   </div>
   <div id="nav">
 <a href="#wed-24-june-am-session-1">Wed 24 June - AM Session 1</a>
@@ -1377,10 +1404,82 @@
       this.textContent = isLight ? "☾ Dark" : "☀ Light";
       savePref("theme", isLight ? "light" : "dark");
     });
-  
+    
+    // xxx
+    
+    function smoothScrollTo(top, duration) {
+      duration = duration || 180;
+      var startY = window.scrollY;
+      var diff = top - startY;
+      if (Math.abs(diff) < 1) return;
+      var startTime = null;
+    
+      function step(timestamp) {
+        if (startTime === null) startTime = timestamp;
+        var elapsed = timestamp - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 2); // easeOutQuad
+        window.scrollTo(0, startY + diff * ease);
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    
+    function scrollToElement(el, duration) {
+      var rect = el.getBoundingClientRect();
+      var top = rect.top + window.scrollY - 20;
+      smoothScrollTo(top, duration);
+    }
+    
+    document.querySelectorAll("#nav a, .top-link").forEach(function(a) {
+      a.addEventListener("click", function(e) {
+        var href = this.getAttribute("href");
+        if (!href || href.charAt(0) !== "#") return;
+        e.preventDefault();
+        var id = href.slice(1);
+        if (id === "") {
+          smoothScrollTo(0);
+        } else {
+          var target = document.getElementById(id);
+          if (target) scrollToElement(target);
+        }
+      });
+    });
+
+    /* --- entry selection --- */
+
+    var selectedEntry = null;
+
+    document.querySelectorAll(".entry").forEach(function(entry) {
+      entry.addEventListener("click", function(e) {
+        if (e.target.closest("a")) return; // let the timestamp link navigate normally
+        if (selectedEntry && selectedEntry !== entry) {
+          selectedEntry.classList.remove("selected");
+        }
+        if (selectedEntry === entry) {
+          entry.classList.remove("selected");
+          selectedEntry = null;
+        } else {
+          entry.classList.add("selected");
+          selectedEntry = entry;
+        }
+      });
+    });
+
+    /* --- search / nav / clear button --- */
+
     function runSearch() {
       var el = document.getElementById("search");
       var q = el ? el.value.toLowerCase().trim() : "";
+      var hasQuery = q !== "";
+
+      document.querySelectorAll("#nav a").forEach(function(a) {
+        a.classList.toggle("hidden", hasQuery);
+      });
+
+      var clearBtn = document.getElementById("search-clear");
+      if (clearBtn) clearBtn.classList.toggle("hidden", !hasQuery);
+
       document.querySelectorAll(".entry").forEach(function(entry) {
         var textEl = entry.querySelector(".entry-text");
         var text = textEl ? textEl.textContent.toLowerCase() : "";
@@ -1438,7 +1537,19 @@
   
     var searchEl = document.getElementById("search");
     if (searchEl) {
-      searchEl.addEventListener("keyup", runSearch);
+      searchEl.addEventListener("input", runSearch);
+    }
+
+    var clearBtnEl = document.getElementById("search-clear");
+    if (clearBtnEl) {
+      clearBtnEl.addEventListener("click", function() {
+        if (searchEl) searchEl.value = "";
+        runSearch();
+        if (selectedEntry) {
+          //selectedEntry.scrollIntoView({ behavior: "smooth", block: "center" });
+          scrollToElement(selectedEntry);
+        }
+      });
     }
   </script>
 </body>
