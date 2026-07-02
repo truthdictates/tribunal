@@ -1962,8 +1962,6 @@
       savePref("theme", isLight ? "light" : "dark");
     });
     
-    // xxx
-    
     function smoothScrollTo(top, duration) {
       duration = duration || 180;
       var startY = window.scrollY;
@@ -1984,7 +1982,7 @@
     
     function scrollToElement(el, duration) {
       var rect = el.getBoundingClientRect();
-      var top = rect.top + window.scrollY - 20;
+      var top = rect.top + window.scrollY - 50;
       smoothScrollTo(top, duration);
     }
     
