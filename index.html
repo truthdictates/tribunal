@@ -143,10 +143,20 @@
 
     /* --- nav --- */
     
-    .nav-timeline   { display:flex; position:relative; font-size:0.85rem; }
+    .nav-timeline {
+      display:flex;
+      position:relative;
+      font-size:0.85rem;
+      max-width: 780px;
+      margin: 0 auto 1.5rem;
+    }
+
     .nav-dates      { flex:1 1 auto; display:flex; flex-direction:column; }
-    .date-row       { display:flex; align-items:center; gap:8px; border-bottom:1px solid #eee; }
-    .date-label     { width:90px; flex-shrink:0; color:#555; font-weight:600; }
+    .date-row {
+      display:flex; align-items:center; gap:8px;
+      border-bottom: 1px solid rgba(128,128,128,0.35);
+    }
+    .date-label     { width:90px; flex-shrink:0; color: var(--muted); font-weight:600; }
     .dot-group      { display:flex; gap:6px; }
     
     .sess-dot {
@@ -157,23 +167,25 @@
     .sess-dot.am { background:#656494; }   /* blue  */
     .sess-dot.pm { background:#469967; }   /* pink  */
     .sess-dot:hover { filter:brightness(1.15); }
+    .sess-dot.highlight {
+      box-shadow: 0 0 0 2px #fff, 0 0 6px rgba(255,255,255,0.7);
+    }
     
     .nav-witness-col {
       flex:0 0 150px; position:relative; margin-left:12px;
-      border-left:2px solid #ddd;
+      border-left:2px solid rgba(128,128,128,0.35);
     }
     .witness-bar {
       position:absolute; left:6px; right:6px;
-      background:#f5f5f5; border-left:3px solid #999;
+      /* background:var(--surface); */
+      /* border-left: 4px solid var(--muted); */
+      border-top: 2px solid rgba(128,128,128,0.35);
       border-radius:2px; padding:2px 6px; box-sizing:border-box;
-      overflow:hidden; font-size:0.72rem; color:#333;
+      overflow:hidden; font-size:0.72rem; color:var(--text);
       display:flex; align-items:center;
     }
     .witness-bar span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     
-    
-    
-
     #nav {
       max-width: 780px;
       margin: 0 auto 1.5rem;
@@ -342,10 +354,10 @@
 <div class="date-row" style="height:34px"><span class="date-label">Tue 30 Jun</span><span class="dot-group"><a href="#tue-30-june-am-1" class="sess-dot am" title="Tue 30 June AM 1">1</a><a href="#tue-30-june-am-2" class="sess-dot am" title="Tue 30 June AM 2">2</a><a href="#tue-30-june-pm-1" class="sess-dot pm" title="Tue 30 June PM 1">1</a><a href="#tue-30-june-pm-2" class="sess-dot pm" title="Tue 30 June PM 2">2</a></span></div>
 <div class="date-row" style="height:34px"><span class="date-label">Wed 01 Jul</span><span class="dot-group"><a href="#wed-01-july-am-1" class="sess-dot am" title="Wed 01 July AM 1">1</a><a href="#wed-01-july-am-2" class="sess-dot am" title="Wed 01 July AM 2">2</a><a href="#wed-01-july-pm-1" class="sess-dot pm" title="Wed 01 July PM 1">1</a><a href="#wed-01-july-pm-2" class="sess-dot pm" title="Wed 01 July PM 2">2</a></span></div>
 <div class="date-row" style="height:34px"><span class="date-label">Thu 02 Jul</span><span class="dot-group"><a href="#thu-02-july-am-1" class="sess-dot am" title="Thu 02 July AM 1">1</a><a href="#thu-02-july-am-2" class="sess-dot am" title="Thu 02 July AM 2">2</a><a href="#thu-02-july-pm-1" class="sess-dot pm" title="Thu 02 July PM 1">1</a><a href="#thu-02-july-pm-2" class="sess-dot pm" title="Thu 02 July PM 2">2</a></span></div>
-<div class="date-row" style="height:34px"><span class="date-label">Fri 03 Jul</span><span class="dot-group"><a href="#fri-03-july-am-1" class="sess-dot am" title="Fri 03 July AM 1">1</a><a href="#fri-03-july-am-2" class="sess-dot am" title="Fri 03 July AM 2">2</a><a href="#fri-03-july-am-3" class="sess-dot am" title="Fri 03 July AM 3">3</a><a href="#fri-03-july-pm-1" class="sess-dot pm" title="Fri 03 July PM 1">1</a><a href="#fri-03-july-pm-2" class="sess-dot pm" title="Fri 03 July PM 2">2</a></span></div></div>  <div class="nav-witness-col"><div class="witness-bar" style="top:0px;height:34px" title="Preliminaries"><span>Preliminaries</span></div>
-<div class="witness-bar" style="top:34px;height:170px" title="Claimant 1"><span>Claimant 1</span></div>
-<div class="witness-bar" style="top:204px;height:47.6px" title="Claimant 2"><span>Claimant 2</span></div>
-<div class="witness-bar" style="top:251.6px;height:20.4px" title="Respondant 1"><span>Respondant 1</span></div></div></div>
+<div class="date-row" style="height:34px"><span class="date-label">Fri 03 Jul</span><span class="dot-group"><a href="#fri-03-july-am-1" class="sess-dot am" title="Fri 03 July AM 1">1</a><a href="#fri-03-july-am-2" class="sess-dot am" title="Fri 03 July AM 2">2</a><a href="#fri-03-july-am-3" class="sess-dot am" title="Fri 03 July AM 3">3</a><a href="#fri-03-july-pm-1" class="sess-dot pm" title="Fri 03 July PM 1">1</a><a href="#fri-03-july-pm-2" class="sess-dot pm" title="Fri 03 July PM 2">2</a></span></div></div>  <div class="nav-witness-col"><div class="witness-bar" style="top:0px;height:34px" title="Preliminaries" data-sessions="wed-24-june-am-1 wed-24-june-am-2 wed-24-june-pm-1 wed-24-june-pm-2"><span>Preliminaries</span></div>
+<div class="witness-bar" style="top:34px;height:170px" title="Samantha Tempest" data-sessions="thu-25-june-am-1 thu-25-june-am-2 thu-25-june-pm-1 thu-25-june-pm-2 fri-26-june-am-1 fri-26-june-am-2 fri-26-june-pm-1 fri-26-june-pm-2 mon-29-june-am-1 mon-29-june-am-2 mon-29-june-pm-1 mon-29-june-pm-2 tue-30-june-am-1 tue-30-june-am-2 tue-30-june-pm-1 tue-30-june-pm-2 wed-01-july-am-1 wed-01-july-am-2 wed-01-july-pm-1 wed-01-july-pm-2"><span>Samantha Tempest</span></div>
+<div class="witness-bar" style="top:204px;height:47.6px" title="Emma Dunn" data-sessions="thu-02-july-am-1 thu-02-july-am-2 thu-02-july-pm-1 thu-02-july-pm-2 fri-03-july-am-1 fri-03-july-am-2"><span>Emma Dunn</span></div>
+<div class="witness-bar" style="top:251.6px;height:20.4px" title="David Hallam" data-sessions="fri-03-july-am-3 fri-03-july-pm-1 fri-03-july-pm-2"><span>David Hallam</span></div></div></div>
   
   <!--
   <div id="nav">
@@ -2223,13 +2235,19 @@
       requestAnimationFrame(step);
     }
     
-    function scrollToElement(el, duration) {
-      var rect = el.getBoundingClientRect();
-      var top = rect.top + window.scrollY - 50;
-      smoothScrollTo(top, duration);
+    function getStickyOffset() {
+      var bar = document.getElementById("search-wrap");
+      var barHeight = bar ? bar.getBoundingClientRect().height : 0;
+      return barHeight + 12; // 12px breathing room below the bar
     }
     
-    document.querySelectorAll("#nav a, .top-link").forEach(function(a) {
+    function scrollToElement(el, duration) {
+      var rect = el.getBoundingClientRect();
+      var top = rect.top + window.scrollY - getStickyOffset();
+      smoothScrollTo(top, duration);
+    }
+
+    document.querySelectorAll(".sess-dot, .top-link").forEach(function(a) {
       a.addEventListener("click", function(e) {
         var href = this.getAttribute("href");
         if (!href || href.charAt(0) !== "#") return;
@@ -2346,6 +2364,59 @@
         if (selectedEntry) {
           //selectedEntry.scrollIntoView({ behavior: "smooth", block: "center" });
           scrollToElement(selectedEntry);
+        }
+      });
+    }
+    
+    var isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+    var activeWitnessBar = null;
+    
+    document.querySelectorAll(".witness-bar").forEach(function(bar) {
+      var ids = (bar.dataset.sessions || "").split(" ").filter(Boolean);
+      var dots = ids.map(function(id) {
+        return document.querySelector('.sess-dot[href="#' + id + '"]');
+      }).filter(Boolean);
+    
+      function setHighlight(on) {
+        dots.forEach(function(d) { d.classList.toggle("highlight", on); });
+      }
+    
+      if (isTouchDevice) {
+        // touch: tap to toggle, tapping elsewhere clears it
+        bar.addEventListener("click", function(e) {
+          e.stopPropagation();
+          if (activeWitnessBar === bar) {
+            setHighlight(false);
+            activeWitnessBar = null;
+          } else {
+            if (activeWitnessBar) {
+              var prevIds = (activeWitnessBar.dataset.sessions || "").split(" ").filter(Boolean);
+              prevIds.forEach(function(id) {
+                var d = document.querySelector('.sess-dot[href="#' + id + '"]');
+                if (d) d.classList.remove("highlight");
+              });
+            }
+            setHighlight(true);
+            activeWitnessBar = bar;
+          }
+        });
+      } else {
+        // desktop: hover, unchanged from before
+        bar.addEventListener("mouseenter", function() { setHighlight(true); });
+        bar.addEventListener("mouseleave", function() { setHighlight(false); });
+      }
+    });
+    
+    if (isTouchDevice) {
+      document.addEventListener("click", function() {
+        if (activeWitnessBar) {
+          var ids = (activeWitnessBar.dataset.sessions || "").split(" ").filter(Boolean);
+          ids.forEach(function(id) {
+            var d = document.querySelector('.sess-dot[href="#' + id + '"]');
+            if (d) d.classList.remove("highlight");
+          });
+          activeWitnessBar = null;
         }
       });
     }
