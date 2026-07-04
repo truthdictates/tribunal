@@ -142,6 +142,37 @@
     #search-clear:hover { color: var(--link-hover); }
 
     /* --- nav --- */
+    
+    .nav-timeline   { display:flex; position:relative; font-size:0.85rem; }
+    .nav-dates      { flex:1 1 auto; display:flex; flex-direction:column; }
+    .date-row       { display:flex; align-items:center; gap:8px; border-bottom:1px solid #eee; }
+    .date-label     { width:90px; flex-shrink:0; color:#555; font-weight:600; }
+    .dot-group      { display:flex; gap:6px; }
+    
+    .sess-dot {
+      width:22px; height:22px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.72rem; font-weight:600; text-decoration:none; color:#fff;
+    }
+    .sess-dot.am { background:#656494; }   /* blue  */
+    .sess-dot.pm { background:#469967; }   /* pink  */
+    .sess-dot:hover { filter:brightness(1.15); }
+    
+    .nav-witness-col {
+      flex:0 0 150px; position:relative; margin-left:12px;
+      border-left:2px solid #ddd;
+    }
+    .witness-bar {
+      position:absolute; left:6px; right:6px;
+      background:#f5f5f5; border-left:3px solid #999;
+      border-radius:2px; padding:2px 6px; box-sizing:border-box;
+      overflow:hidden; font-size:0.72rem; color:#333;
+      display:flex; align-items:center;
+    }
+    .witness-bar span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    
+    
+    
 
     #nav {
       max-width: 780px;
@@ -303,48 +334,24 @@
     <input id="search" type="text" placeholder="Search…" autocomplete="off">
     <button id="search-clear" class="hidden" aria-label="Clear search">Clear ❌</button>
   </div>
+  
+  <div class="nav-timeline" style="height:272px">  <div class="nav-dates"><div class="date-row" style="height:34px"><span class="date-label">Wed 24 Jun</span><span class="dot-group"><a href="#wed-24-june-am-1" class="sess-dot am" title="Wed 24 June AM 1">1</a><a href="#wed-24-june-am-2" class="sess-dot am" title="Wed 24 June AM 2">2</a><a href="#wed-24-june-pm-1" class="sess-dot pm" title="Wed 24 June PM 1">1</a><a href="#wed-24-june-pm-2" class="sess-dot pm" title="Wed 24 June PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Thu 25 Jun</span><span class="dot-group"><a href="#thu-25-june-am-1" class="sess-dot am" title="Thu 25 June AM 1">1</a><a href="#thu-25-june-am-2" class="sess-dot am" title="Thu 25 June AM 2">2</a><a href="#thu-25-june-pm-1" class="sess-dot pm" title="Thu 25 June PM 1">1</a><a href="#thu-25-june-pm-2" class="sess-dot pm" title="Thu 25 June PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Fri 26 Jun</span><span class="dot-group"><a href="#fri-26-june-am-1" class="sess-dot am" title="Fri 26 June AM 1">1</a><a href="#fri-26-june-am-2" class="sess-dot am" title="Fri 26 June AM 2">2</a><a href="#fri-26-june-pm-1" class="sess-dot pm" title="Fri 26 June PM 1">1</a><a href="#fri-26-june-pm-2" class="sess-dot pm" title="Fri 26 June PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Mon 29 Jun</span><span class="dot-group"><a href="#mon-29-june-am-1" class="sess-dot am" title="Mon 29 June AM 1">1</a><a href="#mon-29-june-am-2" class="sess-dot am" title="Mon 29 June AM 2">2</a><a href="#mon-29-june-pm-1" class="sess-dot pm" title="Mon 29 June PM 1">1</a><a href="#mon-29-june-pm-2" class="sess-dot pm" title="Mon 29 June PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Tue 30 Jun</span><span class="dot-group"><a href="#tue-30-june-am-1" class="sess-dot am" title="Tue 30 June AM 1">1</a><a href="#tue-30-june-am-2" class="sess-dot am" title="Tue 30 June AM 2">2</a><a href="#tue-30-june-pm-1" class="sess-dot pm" title="Tue 30 June PM 1">1</a><a href="#tue-30-june-pm-2" class="sess-dot pm" title="Tue 30 June PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Wed 01 Jul</span><span class="dot-group"><a href="#wed-01-july-am-1" class="sess-dot am" title="Wed 01 July AM 1">1</a><a href="#wed-01-july-am-2" class="sess-dot am" title="Wed 01 July AM 2">2</a><a href="#wed-01-july-pm-1" class="sess-dot pm" title="Wed 01 July PM 1">1</a><a href="#wed-01-july-pm-2" class="sess-dot pm" title="Wed 01 July PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Thu 02 Jul</span><span class="dot-group"><a href="#thu-02-july-am-1" class="sess-dot am" title="Thu 02 July AM 1">1</a><a href="#thu-02-july-am-2" class="sess-dot am" title="Thu 02 July AM 2">2</a><a href="#thu-02-july-pm-1" class="sess-dot pm" title="Thu 02 July PM 1">1</a><a href="#thu-02-july-pm-2" class="sess-dot pm" title="Thu 02 July PM 2">2</a></span></div>
+<div class="date-row" style="height:34px"><span class="date-label">Fri 03 Jul</span><span class="dot-group"><a href="#fri-03-july-am-1" class="sess-dot am" title="Fri 03 July AM 1">1</a><a href="#fri-03-july-am-2" class="sess-dot am" title="Fri 03 July AM 2">2</a><a href="#fri-03-july-am-3" class="sess-dot am" title="Fri 03 July AM 3">3</a><a href="#fri-03-july-pm-1" class="sess-dot pm" title="Fri 03 July PM 1">1</a><a href="#fri-03-july-pm-2" class="sess-dot pm" title="Fri 03 July PM 2">2</a></span></div></div>  <div class="nav-witness-col"><div class="witness-bar" style="top:0px;height:34px" title="Preliminaries"><span>Preliminaries</span></div>
+<div class="witness-bar" style="top:34px;height:170px" title="Claimant 1"><span>Claimant 1</span></div>
+<div class="witness-bar" style="top:204px;height:47.6px" title="Claimant 2"><span>Claimant 2</span></div>
+<div class="witness-bar" style="top:251.6px;height:20.4px" title="Respondant 1"><span>Respondant 1</span></div></div></div>
+  
+  <!--
   <div id="nav">
-<a href="#wed-24-june-am-1">Wed 24 June AM 1</a>
-<a href="#wed-24-june-am-2">Wed 24 June AM 2</a>
-<a href="#wed-24-june-pm-1">Wed 24 June PM 1</a>
-<a href="#wed-24-june-pm-2">Wed 24 June PM 2</a>
-<div class="break"></div>
-<a href="#thu-25-june-am-1">Thu 25 June AM 1</a>
-<a href="#thu-25-june-am-2">Thu 25 June AM 2</a>
-<a href="#thu-25-june-pm-1">Thu 25 June PM 1</a>
-<a href="#thu-25-june-pm-2">Thu 25 June PM 2</a>
-<div class="break"></div>
-<a href="#fri-26-june-am-1">Fri 26 June AM 1</a>
-<a href="#fri-26-june-am-2">Fri 26 June AM 2</a>
-<a href="#fri-26-june-pm-1">Fri 26 June PM 1</a>
-<a href="#fri-26-june-pm-2">Fri 26 June PM 2</a>
-<div class="break"></div>
-<a href="#mon-29-june-am-1">Mon 29 June AM 1</a>
-<a href="#mon-29-june-am-2">Mon 29 June AM 2</a>
-<a href="#mon-29-june-pm-1">Mon 29 June PM 1</a>
-<a href="#mon-29-june-pm-2">Mon 29 June PM 2</a>
-<div class="break"></div>
-<a href="#tue-30-june-am-1">Tue 30 June AM 1</a>
-<a href="#tue-30-june-am-2">Tue 30 June AM 2</a>
-<a href="#tue-30-june-pm-1">Tue 30 June PM 1</a>
-<a href="#tue-30-june-pm-2">Tue 30 June PM 2</a>
-<div class="break"></div>
-<a href="#wed-01-july-am-1">Wed 01 July AM 1</a>
-<a href="#wed-01-july-am-2">Wed 01 July AM 2</a>
-<a href="#wed-01-july-pm-1">Wed 01 July PM 1</a>
-<a href="#wed-01-july-pm-2">Wed 01 July PM 2</a>
-<div class="break"></div>
-<a href="#thu-02-july-am-1">Thu 02 July AM 1</a>
-<a href="#thu-02-july-am-2">Thu 02 July AM 2</a>
-<a href="#thu-02-july-pm-1">Thu 02 July PM 1</a>
-<a href="#thu-02-july-pm-2">Thu 02 July PM 2</a>
-<div class="break"></div>
-<a href="#fri-03-july-am-1">Fri 03 July AM 1</a>
-<a href="#fri-03-july-am-2">Fri 03 July AM 2</a>
-<a href="#fri-03-july-am-3">Fri 03 July AM 3</a>
-<a href="#fri-03-july-pm-1">Fri 03 July PM 1</a>
-<a href="#fri-03-july-pm-2">Fri 03 July PM 2</a>
+{nav_html}
   </div>
+  -->
   <div id="feed">
 <div class="section" id="wed-24-june-am-1"><h2 class="section-heading"><span>Wed 24 June AM 1</span><a class="top-link" href="#">&#8593; top</a></h2><div class="entry"><div class="entry-date"><a href="https://x.com/tribunaltweets/status/2069694223230578706" target="_BLANK"><span class="dt-date">24 Jun 2026</span><span class="dt-time">08:08</span></a></div><div class="entry-text">We hope to report today on the employment tribunal of Samantha Tempest & PQ vs DEFRA and the Rural Payments Agency.</div></div>
 <div class="entry"><div class="entry-date"><a href="https://x.com/tribunaltweets/status/2069694659345949177" target="_BLANK"><span class="dt-date">24 Jun 2026</span><span class="dt-time">08:10</span></a></div><div class="entry-text">It is the first day of hearings so there may well applications or other business for the Tribunal to deal with. Official start time is 10 am.</div></div>
