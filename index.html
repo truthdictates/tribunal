@@ -98,13 +98,14 @@
     #search-wrap {
       max-width: 780px;
       margin: 0 auto 1rem;
-      position: relative;
       position: sticky;
       top: 0;
       z-index: 10;
       background: var(--bg);
       padding-top: 0.6rem;
       padding-bottom: 0.6rem;
+      transform: translateZ(0);   /* forces its own compositing layer */
+      will-change: transform;     /* hints the browser to keep it composited */
     }
 
     #search {
@@ -347,7 +348,7 @@
     <button id="search-clear" class="hidden" aria-label="Clear search">Clear ❌</button>
   </div>
   
-  <div class="nav-timeline" style="height:272px">  <div class="nav-dates"><div class="date-row" style="height:34px"><span class="date-label">Wed 24 Jun</span><span class="dot-group"><a href="#wed-24-june-am-1" class="sess-dot am" title="Wed 24 June AM 1">1</a><a href="#wed-24-june-am-2" class="sess-dot am" title="Wed 24 June AM 2">2</a><a href="#wed-24-june-pm-1" class="sess-dot pm" title="Wed 24 June PM 1">1</a><a href="#wed-24-june-pm-2" class="sess-dot pm" title="Wed 24 June PM 2">2</a></span></div>
+  <div class="nav-timeline" id="nav-timeline" style="height:272px">  <div class="nav-dates"><div class="date-row" style="height:34px"><span class="date-label">Wed 24 Jun</span><span class="dot-group"><a href="#wed-24-june-am-1" class="sess-dot am" title="Wed 24 June AM 1">1</a><a href="#wed-24-june-am-2" class="sess-dot am" title="Wed 24 June AM 2">2</a><a href="#wed-24-june-pm-1" class="sess-dot pm" title="Wed 24 June PM 1">1</a><a href="#wed-24-june-pm-2" class="sess-dot pm" title="Wed 24 June PM 2">2</a></span></div>
 <div class="date-row" style="height:34px"><span class="date-label">Thu 25 Jun</span><span class="dot-group"><a href="#thu-25-june-am-1" class="sess-dot am" title="Thu 25 June AM 1">1</a><a href="#thu-25-june-am-2" class="sess-dot am" title="Thu 25 June AM 2">2</a><a href="#thu-25-june-pm-1" class="sess-dot pm" title="Thu 25 June PM 1">1</a><a href="#thu-25-june-pm-2" class="sess-dot pm" title="Thu 25 June PM 2">2</a></span></div>
 <div class="date-row" style="height:34px"><span class="date-label">Fri 26 Jun</span><span class="dot-group"><a href="#fri-26-june-am-1" class="sess-dot am" title="Fri 26 June AM 1">1</a><a href="#fri-26-june-am-2" class="sess-dot am" title="Fri 26 June AM 2">2</a><a href="#fri-26-june-pm-1" class="sess-dot pm" title="Fri 26 June PM 1">1</a><a href="#fri-26-june-pm-2" class="sess-dot pm" title="Fri 26 June PM 2">2</a></span></div>
 <div class="date-row" style="height:34px"><span class="date-label">Mon 29 Jun</span><span class="dot-group"><a href="#mon-29-june-am-1" class="sess-dot am" title="Mon 29 June AM 1">1</a><a href="#mon-29-june-am-2" class="sess-dot am" title="Mon 29 June AM 2">2</a><a href="#mon-29-june-pm-1" class="sess-dot pm" title="Mon 29 June PM 1">1</a><a href="#mon-29-june-pm-2" class="sess-dot pm" title="Mon 29 June PM 2">2</a></span></div>
@@ -2289,9 +2290,12 @@
       var q = el ? el.value.toLowerCase().trim() : "";
       var hasQuery = q !== "";
 
-      document.querySelectorAll("#nav a").forEach(function(a) {
-        a.classList.toggle("hidden", hasQuery);
-      });
+      // document.querySelectorAll("#nav a").forEach(function(a) {
+      //   a.classList.toggle("hidden", hasQuery);
+      // });
+
+      var timelineEl = document.getElementById("nav-timeline");
+      if (timelineEl) timelineEl.classList.toggle("hidden", hasQuery);
 
       var clearBtn = document.getElementById("search-clear");
       if (clearBtn) clearBtn.classList.toggle("hidden", !hasQuery);
@@ -2351,9 +2355,18 @@
       CSS.highlights.set("search-match", highlight);
     }
   
+    function debounce(fn, delay) {
+      var timer;
+      return function() {
+        var args = arguments, ctx = this;
+        clearTimeout(timer);
+        timer = setTimeout(function() { fn.apply(ctx, args); }, delay);
+      };
+    }
+    
     var searchEl = document.getElementById("search");
     if (searchEl) {
-      searchEl.addEventListener("input", runSearch);
+      searchEl.addEventListener("input", debounce(runSearch, 500));
     }
 
     var clearBtnEl = document.getElementById("search-clear");
