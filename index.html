@@ -95,7 +95,7 @@
 
     /* --- search --- */
 
-    #search-wrap {
+        #search-wrap {
       max-width: 780px;
       margin: 0 auto 1rem;
       position: sticky;
@@ -109,16 +109,6 @@
       gap: 0.5rem;
     }
     
-    #search-wrap.is-pinned {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 0 auto;   /* keeps it centred at max-width:780px inside a full-width fixed box */
-    }
-    
-    #search-placeholder { display: none; }
-
     #search-input-wrap {
       position: relative;
       flex: 1 1 auto;              /* fix 1: input group takes remaining space */
@@ -2659,39 +2649,6 @@
         }
       });
     }
-    
-    (function() {
-      var wrap = document.getElementById("search-wrap");
-      if (!wrap || !("IntersectionObserver" in window)) return;
-    
-      var sentinel = document.createElement("div");
-      sentinel.id = "search-sentinel";
-      wrap.parentNode.insertBefore(sentinel, wrap);
-    
-      var placeholder = document.createElement("div");
-      placeholder.id = "search-placeholder";
-      wrap.parentNode.insertBefore(placeholder, wrap);
-    
-      function pin() {
-        if (wrap.classList.contains("is-pinned")) return;
-        placeholder.style.height = wrap.getBoundingClientRect().height + "px";
-        placeholder.style.display = "block";
-        wrap.classList.add("is-pinned");
-      }
-      function unpin() {
-        if (!wrap.classList.contains("is-pinned")) return;
-        wrap.classList.remove("is-pinned");
-        placeholder.style.display = "none";
-      }
-    
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) unpin(); else pin();
-        });
-      }, { threshold: 0 });
-    
-      observer.observe(sentinel);
-    })();
     
   </script>
 </body>
